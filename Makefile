@@ -46,7 +46,8 @@ TARGET=ford_132_boot_bsp
 #
 # If APPNAME is edited, ensure to update or regenerate launch
 # configurations for your IDE.
-APPNAME=mtb-example-psoc4-empty-app
+# APPNAME=mtb-example-psoc4-empty-app
+APPNAME=CN_FW_FORD132CD483_BL_MCU
 
 # Name of toolchain to use. Options include:
 #
@@ -137,8 +138,11 @@ LINKER_SCRIPT=
 PREBUILD=
 
 # Custom post-build commands to run.
-POSTBUILD=
-
+# POSTBUILD=
+POSTBUILD="$(CY_TOOLS_PATHS)/gcc/bin/arm-none-eabi-objcopy.exe" \
+			../$(APPNAME)/build/$(TARGET)/$(CONFIG)/$(APPNAME).elf \
+			../$(APPNAME)/build/$(TARGET)/$(CONFIG)/$(APPNAME).bin -O binary --gap-fill=0xff --pad-to=0x20000
+			
 
 ################################################################################
 # Paths

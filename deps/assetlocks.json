@@ -4,10 +4,6 @@
         "locked-commit": "release-v1.1.0"
     },
     {
-        "asset-name": "cmsis",
-        "locked-commit": "release-v5.8.0"
-    },
-    {
         "asset-name": "core-lib",
         "locked-commit": "release-v1.4.2"
     },
