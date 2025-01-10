@@ -40,7 +40,7 @@
 * so agrees to indemnify Cypress against all liability.
 *******************************************************************************/
 
-#include "cy_pdl.h"
+//#include "cy_pdl.h"
 #include "cybsp.h"
 #include "Boot_main.h"
 int main(void)
@@ -63,6 +63,7 @@ int main(void)
     {
     }
 #endif
+
     (void)Boot_main();
 }
 

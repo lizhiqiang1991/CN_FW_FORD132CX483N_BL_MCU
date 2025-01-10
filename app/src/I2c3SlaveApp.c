@@ -34,7 +34,7 @@ static uint8_t u8retMsg[2];
 static uint16_t u16CalculateChecksum = 0U;
 static uint16_t u16DataChecksum = 0U;
 static uint8_t u8checksum_reset = 0U;
-static uint16_t u16SerialID;
+static uint16_t u16SerialID;//发送app数据帧的序列号
 
 static uint8_t u8BootloaderStatusFlag = (uint8_t)(DEFAULT_BL_STATUS); /* default is BL mode */
 static bool gbResetFlag = false;
@@ -227,12 +227,12 @@ void I2c3SlaveApp_Update_Cmd_Process(void)
 	{
 		switch (u8Cmd)
 		{
-		case CMD_UPDATE_REQUEST:
+		case CMD_UPDATE_REQUEST:  //0xe4
 			/*Now is already in bootloader, should not receive this cmd*/
 			u8retMsg[0] = 0x7F;
 			I2c3SlaveApp_Prepare_Response_Buf(CMD_UPDATE_ACK, LEN_UPDATE_ACK, u8retMsg);
 			break;
-		case CMD_BOOTLOADER_HS:
+		case CMD_BOOTLOADER_HS: //0xe5
 			if (I2c3SlaveApp_Rx_Checksum_Check() == true)
 			{
 				u8retMsg[0] = 0x43;
@@ -246,7 +246,7 @@ void I2c3SlaveApp_Update_Cmd_Process(void)
 			I2c3SlaveApp_Prepare_Response_Buf(CMD_BOOTLOADER_HS_ACK, LEN_BOOTLOADER_HS_ACK, u8retMsg);
 			break;
 
-		case CMD_ERASE_REQUEST:
+		case CMD_ERASE_REQUEST://0xe6
 			if ((I2c3SlaveApp_Rx_Checksum_Check() == true) && ((u8BootloaderStatusFlag & 0x01U) == (uint8_t)SET_BL_HANDSHAKE))
 			{
 				u8retMsg[0] = 0x43;
@@ -261,7 +261,7 @@ void I2c3SlaveApp_Update_Cmd_Process(void)
 			I2c3SlaveApp_Prepare_Response_Buf(CMD_ERASE_REQUEST_ACK, LEN_ERASE_REQUEST_ACK, u8retMsg);
 			break;
 
-		case CMD_APP_PROGRAM:
+		case CMD_APP_PROGRAM://0xe7
 			if ((I2c3SlaveApp_Rx_Checksum_Check() == true) && ((u8BootloaderStatusFlag & 0x03U) == ((uint8_t)SET_BL_HANDSHAKE | (uint8_t)SET_APP_ERASE)))
 			{
 				u16SerialID = ((tsI2cSlaveRx.buf[OFFSET_DAT] << 8U) | tsI2cSlaveRx.buf[OFFSET_DAT + 1]);
@@ -288,7 +288,7 @@ void I2c3SlaveApp_Update_Cmd_Process(void)
 			I2c3SlaveApp_Prepare_Response_Buf(CMD_APP_PROGRAM_ACK, LEN_APP_PROGRAM_ACK, u8retMsg);
 			break;
 
-		case CMD_APP_CHECKSUM:
+		case CMD_APP_CHECKSUM://0xe8
 			if (I2c3SlaveApp_Rx_Checksum_Check() == true)
 			{
 				u16CalculateChecksum = CrcApp_GetCheckSum16();
@@ -310,7 +310,7 @@ void I2c3SlaveApp_Update_Cmd_Process(void)
 			I2c3SlaveApp_Prepare_Response_Buf(CMD_APP_CHECKSUM_ACK, LEN_APP_CHECKSUM_ACK, u8retMsg);
 			break;
 
-		case CMD_UPDATE_STATUS:
+		case CMD_UPDATE_STATUS://0xe9
 			if (I2c3SlaveApp_Rx_Checksum_Check() == true)
 			{
 				u8BootloaderStatusFlag |= (uint8_t)SET_UPDATE_STATUS_EVENT;
@@ -338,7 +338,7 @@ void I2c3SlaveApp_Update_Cmd_Process(void)
 			I2c3SlaveApp_Prepare_Response_Buf(CMD_UPDATE_STATUS_ACK, LEN_UPDATE_STATUS_ACK, u8retMsg);
 			break;
 
-		case USER_CMD_STATUS:
+		case USER_CMD_STATUS://0xea
 			if (I2c3SlaveApp_Rx_Checksum_Check() == true)
 			{
 				u8retMsg[0] = u8BootloaderStatusFlag;
@@ -350,11 +350,11 @@ void I2c3SlaveApp_Update_Cmd_Process(void)
 			I2c3SlaveApp_Prepare_Response_Buf(CMD_USER_CMD_STATUS_ACK, LEN_UPDATE_STATUS_ACK, u8retMsg);
 			break;
 
-		case CMD_UPDATE_ACK:
+		case CMD_UPDATE_ACK://0xf4
 			HAL_I2C_MS_TxBuf_Config(txBuffer, LEN_UPDATE_ACK + SUBADDR_ID);
 			break;
 
-		case CMD_BOOTLOADER_HS_ACK:
+		case CMD_BOOTLOADER_HS_ACK://0xf5
 			HAL_I2C_MS_TxBuf_Config(txBuffer, LEN_BOOTLOADER_HS_ACK + SUBADDR_ID);
 			break;
 
@@ -370,12 +370,12 @@ void I2c3SlaveApp_Update_Cmd_Process(void)
 			HAL_I2C_MS_TxBuf_Config(txBuffer, LEN_APP_CHECKSUM_ACK + SUBADDR_ID);
 			break;
 
-		case CMD_UPDATE_STATUS_ACK:
+		case CMD_UPDATE_STATUS_ACK://0xf9
 			HAL_I2C_MS_TxBuf_Config(txBuffer, LEN_UPDATE_STATUS_ACK + SUBADDR_ID);
 			gbResetFlag = true;
 			break;
 
-		case CMD_USER_CMD_STATUS_ACK:
+		case CMD_USER_CMD_STATUS_ACK://0xfa
 			HAL_I2C_MS_TxBuf_Config(txBuffer, LEN_USER_CMD_STATUS_ACK + SUBADDR_ID);
 			break;
 
@@ -416,9 +416,9 @@ void I2c3SlaveApp_Flash_Operate_Process(void)
 
 		u8BootloaderStatusFlag &= ~(uint8_t)SET_APP_PROGRAM_EVENT;
 
-		if (u16SerialID % 2 == 0)
+		if (u16SerialID % 2 == 0)//接受的偶数帧序列号
 		{
-			(void)memcpy((uint8_t *)&WriteBuffer[128], &tsI2cSlaveRx.buf[4], 128);
+			(void)memcpy((uint8_t *)&WriteBuffer[128], &tsI2cSlaveRx.buf[4], 128);//每一帧128 byte
 			u32FlashWriteAddr = (uint32_t)ADDR_APP_START + ((u16SerialID - 2U) << 7U);
 			FlashRwApp_256B_Page_Write(u32FlashWriteAddr, (uint8_t *)&WriteBuffer[0]);
 		}

@@ -18,7 +18,7 @@
 
 /* Boot Access Key */
 //#define		CHK_UPDATE_KEY	0x5AU
-#define		CHK_UPDATE_KEY	0x55AAU
+#define		CHK_UPDATE_KEY	0x55AAA5B5U
 
 #define		CLR_KEYS				0x0000U
 

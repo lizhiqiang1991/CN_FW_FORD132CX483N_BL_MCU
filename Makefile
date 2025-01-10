@@ -145,8 +145,10 @@ POSTBUILD="$(CY_TOOLS_PATHS)/gcc/bin/arm-none-eabi-objcopy.exe" \
 			
 
 ################################################################################
-# Paths
+# Paths########
 ################################################################################
+
+
 
 # Relative path to the project directory (default is the Makefile's directory).
 #

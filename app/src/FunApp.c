@@ -10,7 +10,8 @@
 #include "InitApp.h"
 /*---------------------------- Declare External Var --------------------------*/
 static uint32_t u32AppAddress = APP_START_ADDR;
-volatile uint16_t *u16UpdateKey = ((volatile uint16_t *)(0x20003F00));
+//volatile uint32_t *u16UpdateKey = ((volatile uint32_t *)(0x20003F00));
+__attribute__((section (".user_RAM"))) uint32_t u16UpdateKey;
 const uint8_t u8APPChecker[] = {"APP_Activated"};
 
 /*---------------------------- Start Program ---------------------------------*/
@@ -90,15 +91,19 @@ static uint8_t FunApp_App_Crc_Check(uint8_t u8Para)
 ******************************************************************************/
 uint8_t FunApp_Startup_Check(uint8_t u8Para)
 {
-	if (*u16UpdateKey == (uint16_t)(CHK_UPDATE_KEY))
+	//if ((*u16UpdateKey == (uint32_t)(CHK_UPDATE_KEY))&&(/*CY_SYSLIB_RESET_SOFT*/0x10 & Cy_SysLib_GetResetReason()))
+	if ((u16UpdateKey == (uint32_t)(CHK_UPDATE_KEY))&&(/*CY_SYSLIB_RESET_SOFT*/0x10 & Cy_SysLib_GetResetReason()))
+	//if ((*u16UpdateKey == (uint16_t)(CHK_UPDATE_KEY)))
 	{
-		*u16UpdateKey = (uint16_t)CLR_KEYS;
+		//*u16UpdateKey = (uint16_t)CLR_KEYS;
+		u16UpdateKey = (uint16_t)CLR_KEYS;
 		(void)InitApp_StateMachine_Set(BL_INIT);
-		//HAL_UART_Printf("Jump to update process\n");
+		Cy_SysLib_ClearResetReason();
+		HAL_UART_Printf("Jump to update process\n");
 	}
 	else
 	{
-		//HAL_UART_Printf("Jump to crc check\n");
+		//HAL_UART_Printf("Jump to crc check ==0x%x\n",(uint32_t)(*u16UpdateKey));
 		(void)FunApp_App_Crc_Check(NOTHING);
 	}
 	(void)(u8Para);

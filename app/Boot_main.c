@@ -38,7 +38,9 @@ static void Main_UartInit(void)
 static void Main_BspInit(void)
 {
 	(void)cybsp_init();
-	//(void)Main_UartInit();
+    #ifdef DEBUG_UART_EN
+		(void)Main_UartInit();
+	#endif
 }
 /******************************************************************************
 ;       Function Name			:	void main(void)
@@ -50,6 +52,7 @@ static void Main_BspInit(void)
 int Boot_main(void)
 {
 	Main_BspInit();
+	HAL_UART_Printf("in boot program\n");
 	while (true)
 	{
 		switch (InitApp_StateMachine_Get())
