@@ -47,7 +47,7 @@ TARGET=ford_132_boot_bsp
 # If APPNAME is edited, ensure to update or regenerate launch
 # configurations for your IDE.
 # APPNAME=mtb-example-psoc4-empty-app
-APPNAME=CN_FW_FORD132CD483_BL_MCU
+APPNAME=CN_FW_FORD132CX483N_BL_MCU
 
 # Name of toolchain to use. Options include:
 #

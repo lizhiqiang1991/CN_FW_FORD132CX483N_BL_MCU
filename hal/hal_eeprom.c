@@ -146,7 +146,7 @@ cy_en_em_eeprom_status_t HAL_EEPROM_WRITE(uint8_t *u8Data, uint16_t u16Offset, u
 	}
 	else
 	{
-		gt_ret = ( CY_EM_EEPROM_ID_ERROR + 6UL ); // overflow data length
+		gt_ret = (CY_EM_EEPROM_ID_ERROR + 6UL ); // overflow data length
 	}
 	return gt_ret;
 }
