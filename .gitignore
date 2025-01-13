@@ -14,11 +14,11 @@ libs/
 # !locking_commit.log
 
 # ModusToolbox Configurator generated code and lock file
-GeneratedSource/
+#GeneratedSource/
 *.lock
 
 # ModusToolbox BSP files. Any custom BSP file is shipped within the 'templates' folder
-bsps/
+#bsps/
 
 # ModusToolbox build system output
 build/
@@ -33,6 +33,7 @@ Release/
 .project
 .mtbLaunchConfigs/
 makefile.init
+.mtbqueryapi
 
 # Visual Studio Code
 openocd.tcl
