@@ -15,7 +15,7 @@
 #include "public.h"
 
 /*---------------------------- Definition -----------------------------------*/
-#define DEBUG_UART_EN
+//#define DEBUG_UART_EN
 #define DEBUG_GPIO_EN
 #define DEBUG_PORT				DEBUG_UART_HW
 
