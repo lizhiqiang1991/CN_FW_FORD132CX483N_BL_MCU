@@ -11,7 +11,7 @@
 * CAPSENSE(TM) Configurator 6.30.0.7699
 *
 ********************************************************************************
-* Copyright 2024, Cypress Semiconductor Corporation (an Infineon company) 
+* Copyright 2025, Cypress Semiconductor Corporation (an Infineon company) 
 * or an affiliate of Cypress Semiconductor Corporation.
 * SPDX-License-Identifier: Apache-2.0
 *

@@ -5,11 +5,11 @@
  * System configuration
  * This file was automatically generated and should not be modified.
  * Configurator Backend 3.30.0
- * device-db 4.18.0.7028
- * mtb-pdl-cat2 2.12.0.12916
+ * device-db 4.20.0.7450
+ * mtb-pdl-cat2 2.14.0.14518
  *
  *******************************************************************************
- * Copyright 2024 Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2025 Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -46,6 +46,7 @@ extern "C" {
 #define CY_CFG_SYSCLK_PLL_CFG_ERROR 4
 #define CY_CFG_SYSCLK_PLL_EN_ERROR 5
 #define CY_CFG_SYSCLK_HF_SRC_ERROR 6
+#define CY_CFG_SYSCLK_LF_SRC_ERROR 7
 #define srss_0_clock_0_altsystickclk_0_ENABLED 1U
 #define srss_0_clock_0_hfclk_0_ENABLED 1U
 #define srss_0_clock_0_imo_0_ENABLED 1U

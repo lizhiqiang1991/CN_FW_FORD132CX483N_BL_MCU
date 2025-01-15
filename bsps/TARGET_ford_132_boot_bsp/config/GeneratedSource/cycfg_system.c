@@ -5,11 +5,11 @@
  * System configuration
  * This file was automatically generated and should not be modified.
  * Configurator Backend 3.30.0
- * device-db 4.18.0.7028
- * mtb-pdl-cat2 2.12.0.12916
+ * device-db 4.20.0.7450
+ * mtb-pdl-cat2 2.14.0.14518
  *
  *******************************************************************************
- * Copyright 2024 Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2025 Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -87,7 +87,7 @@ void init_cycfg_system(void)
         #endif /* CY_CFG_PWR_INIT */
     #endif /* CY_CFG_PWR_ENABLED */
     
-    /* Reset the platform clocks configuration to teh default state */
+    /* Reset the platform clocks configuration to the default state */
     Cy_SysClk_ImoEnable();
     (void)Cy_SysClk_ImoSetFrequency(CY_SYSCLK_IMO_24MHZ);
     (void)Cy_SysClk_ClkHfSetSource(CY_SYSCLK_CLKHF_IN_IMO);
@@ -101,6 +101,14 @@ void init_cycfg_system(void)
     
     /* Init all source clocks */
     Cy_SysClk_IloInit();
+    
+    #ifdef CY_CFG_SYSCLK_PILO_ENABLED
+    Cy_SysClk_PiloInit();
+    #endif
+    
+    #ifdef CY_CFG_SYSCLK_HPOSC_ENABLED
+    Cy_SysClk_HposcInit();
+    #endif
     
     #ifdef CY_CFG_SYSCLK_WCO_ENABLED
     Cy_SysClk_WcoInit();
