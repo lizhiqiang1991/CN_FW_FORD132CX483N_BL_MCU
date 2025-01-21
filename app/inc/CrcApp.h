@@ -8,7 +8,6 @@
 ******************************************************************************/
 #ifndef CrcApp_H
 #define CrcApp_H 
-#include <stdint.h>
 /*---------------------------- Define Constant ------------------------------*/
 #define		INIT_CRC32		0xFFFFFFFFU
 #define		INIT_CRC16		0x0000U

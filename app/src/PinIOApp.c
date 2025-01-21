@@ -23,7 +23,7 @@
 bool PinIOApp_Power_Sequence(uint8_t u8Switch)
 {
 	uint8_t u8PGLevel;
-    uint8_t u8Return=0;
+    uint8_t u8Return;
 	switch(u8Switch)
 	{
 		case SYS_PWR_ON:

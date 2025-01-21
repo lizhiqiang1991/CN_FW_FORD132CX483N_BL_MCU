@@ -142,7 +142,8 @@ PREBUILD=
 POSTBUILD="$(CY_TOOLS_PATHS)/gcc/bin/arm-none-eabi-objcopy.exe" \
 			../$(APPNAME)/build/$(TARGET)/$(CONFIG)/$(APPNAME).elf \
 			../$(APPNAME)/build/$(TARGET)/$(CONFIG)/$(APPNAME).bin -O binary --gap-fill=0xff --pad-to=0x20000
-			
+#			../ford_u625/build/$(TARGET)/$(CONFIG)/$(APPNAME).elf \
+#			../ford_u625/build/$(TARGET)/$(CONFIG)/$(APPNAME).bin -O binary --gap-fill=0xff --pad-to=0x20000			
 
 ################################################################################
 # Paths########

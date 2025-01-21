@@ -20,7 +20,7 @@
 /** Please Refer to datasheet to check the SCB5 SDA/SCL pin*/
 #define     I2CS_WBUFFER_SIZE           255U
 #define     I2CS_RBUFFER_SIZE           32U
-#define		ECU_VER						"T-02.00.00"
+#define		ECU_VER						"Z-02.05.00"
 
 #define		ADDR_APP_START					0x8000U
 
@@ -78,6 +78,7 @@
 #define		CMD_APP_CHECKSUM_ACK		((uint8_t)0xF8U)
 #define		CMD_UPDATE_STATUS_ACK	    ((uint8_t)0xF9U)
 #define		CMD_USER_CMD_STATUS_ACK	    ((uint8_t)0xFAU)
+#define     CMD_USER_CMD_Version_ACK    ((uint8_t)0xDFU)
 
 #define		LEN_UPDATE					((uint8_t)0x03U)
 #define		LEN_BOOTLOADER_HS			((uint8_t)0x03U)
@@ -93,6 +94,7 @@
 #define		LEN_APP_CHECKSUM_ACK		((uint8_t)0x03U)
 #define		LEN_UPDATE_STATUS_ACK		((uint8_t)0x03U)
 #define		LEN_USER_CMD_STATUS_ACK		((uint8_t)0x03U)
+#define     LEN_USER_CMD_Version_ACK    ((uint8_t)0x0AU)
 
 #define 	BUFFER_RES_MAX		        4U
 #define 	OFFSET_CMD			        0U

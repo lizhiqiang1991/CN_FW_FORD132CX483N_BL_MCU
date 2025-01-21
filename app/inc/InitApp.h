@@ -9,13 +9,12 @@
 #ifndef INITAPP_H
 #define INITAPP_H
 /*---------------------------- Include File ---------------------------------*/
+#include "main.h"
 #include "CrcApp.h"
 #include "FunApp.h"
 #include "FlashRwApp.h"
 #include "I2c3SlaveApp.h"
 #include "InitApp.h"
-
-#include "../Boot_main.h"
 #include "PinIOApp.h"
 /*---------------------------- Define Constant ------------------------------*/
 /*---------------------------- Support Function -----------------------------*/

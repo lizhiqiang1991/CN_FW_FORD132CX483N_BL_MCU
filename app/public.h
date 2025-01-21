@@ -48,8 +48,6 @@
 #define STATUS_WAIT 2U
 #define STATUS_BUSY 3U
 
+#define CY_SYSLIB_RESET_SOFT 0x10U
 
-
-
-//#define CY_SYSLIB_RESET_SOFT 0x10U
 #endif

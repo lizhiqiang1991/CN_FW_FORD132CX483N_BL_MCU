@@ -9,7 +9,6 @@
 #pragma once
 #ifndef HAL_FMC_H
 #define HAL_FMC_H
-#include "cy_flash.h"
 /*---------------------------- Include File ---------------------------------*/
 /*---------------------------- Define Constant ------------------------------*/
 #if (CY_FLASH_SIZEOF_ROW == 64)

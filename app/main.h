@@ -6,15 +6,11 @@
 ;       Date		: 2021 / 10 / 08
 ;       Author		: Joel Wang
 ******************************************************************************/
-#ifndef BOOT_MAIN_H
-#define BOOT_MAIN_H
-
-
-int Boot_main(void);
+#ifndef MAIN_H
+#define MAIN_H
 /*---------------------------- Include Library ------------------------------*/
 #include <stddef.h>		/* Defines NULL */
 #include "public.h"
-#include <stdint.h>
 /*---------------------------- Switch Support Function ----------------------*/
 #define		DEBUG_UART			false
 #define		WDT_RST				false

@@ -12,7 +12,7 @@
 #define CRC8_H
 
 /*---------------------------- Include File ---------------------------------*/
-#include "../Boot_main.h"
+#include "main.h"
 
 /*---------------------------- Declare Function -----------------------------*/
 uint8_t CRC8_Calculation(uint8_t *pu8data,uint8_t u8Length);

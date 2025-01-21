@@ -8,8 +8,7 @@
 ;				Describe	:	
 ******************************************************************************/
 /*---------------------------- Include File ---------------------------------*/
-#include "Boot_main.h"
-
+#include "main.h"
 #include "InitApp.h"
 
 /******************************************************************************
@@ -38,9 +37,7 @@ static void Main_UartInit(void)
 static void Main_BspInit(void)
 {
 	(void)cybsp_init();
-    #ifdef DEBUG_UART_EN
-		(void)Main_UartInit();
-	#endif
+	//(void)Main_UartInit();
 }
 /******************************************************************************
 ;       Function Name			:	void main(void)
@@ -49,10 +46,9 @@ static void Main_BspInit(void)
 ;       Return Values			:
 ;       Source ID				:
 ******************************************************************************/
-int Boot_main(void)
+int main(void)
 {
 	Main_BspInit();
-	HAL_UART_Printf("in boot program\n");
 	while (true)
 	{
 		switch (InitApp_StateMachine_Get())
